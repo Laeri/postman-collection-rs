@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Spec {
     #[serde(rename = "auth")]
@@ -24,6 +25,7 @@ pub struct Spec {
 }
 
 /// Represents authentication helpers provided by Postman
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Auth {
     /// The attributes for [API key Auth](https://en.wikipedia.org/wiki/API_key).
@@ -84,6 +86,7 @@ pub struct Auth {
 /// are stored here, and can be referenced in the collection by their ID.
 ///
 /// Defines a script associated with an associated event name
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Event {
     /// Indicates whether the event is disabled. If absent, the event is assumed to be enabled.
@@ -104,6 +107,7 @@ pub struct Event {
 
 /// A script is a snippet of Javascript code that can be used to to perform setup or teardown
 /// operations on a particular response.
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Script {
     #[serde(rename = "exec")]
@@ -125,6 +129,7 @@ pub struct Script {
     pub script_type: Option<String>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct UrlClass {
     /// Contains the URL fragment (if any). Usually this is not transmitted over the network, but
@@ -165,6 +170,7 @@ pub struct UrlClass {
     pub variable: Option<Vec<Variable>>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct PathClass {
     #[serde(rename = "type")]
@@ -174,6 +180,7 @@ pub struct PathClass {
     pub value: Option<String>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct QueryParam {
     #[serde(rename = "description")]
@@ -190,6 +197,7 @@ pub struct QueryParam {
     pub value: Option<String>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Description {
     /// The content of the description goes here, as a raw string.
@@ -214,6 +222,7 @@ pub struct Description {
 /// Using variables in your Postman requests eliminates the need to duplicate requests, which
 /// can save a lot of time. Variables can be defined, and referenced to from any part of a
 /// request.
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Variable {
     #[serde(rename = "description")]
@@ -251,6 +260,7 @@ pub struct Variable {
 }
 
 /// Detailed description of the info block
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Information {
     /// Every collection is identified by the unique value of this field. The value of this field
@@ -260,6 +270,12 @@ pub struct Information {
     /// *Note: This field exists for compatibility reasons with Collection Format V1.*
     #[serde(rename = "_postman_id")]
     pub postman_id: Option<String>,
+
+    #[serde(rename = "_exporter_id")]
+    pub exporter_id: Option<String>,
+
+    #[serde(rename = "_collection_link")]
+    pub collection_link: Option<String>,
 
     #[serde(rename = "description")]
     pub description: Option<DescriptionUnion>,
@@ -279,6 +295,7 @@ pub struct Information {
     pub version: Option<CollectionVersion>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct CollectionVersionClass {
     /// A human friendly identifier to make sense of the version numbers. E.g: 'beta-3'
@@ -309,6 +326,7 @@ pub struct CollectionVersionClass {
 /// One of the primary goals of Postman is to organize the development of APIs. To this end,
 /// it is necessary to be able to group requests together. This can be achived using
 /// 'Folders'. A folder just is an ordered set of requests.
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Items {
     #[serde(rename = "description")]
@@ -351,6 +369,7 @@ pub struct Items {
 }
 
 /// Set of configurations used to alter the usual behavior of sending the request
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct ProtocolProfileBehavior {
     /// Disable body pruning for GET, COPY, HEAD, PURGE and UNLOCK request methods.
@@ -358,6 +377,7 @@ pub struct ProtocolProfileBehavior {
     pub disable_body_pruning: Option<bool>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct RequestClass {
     #[serde(rename = "auth")]
@@ -386,6 +406,7 @@ pub struct RequestClass {
 }
 
 /// This field contains the data usually contained in the request body.
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Body {
     /// When set to true, prevents request body from being sent.
@@ -409,6 +430,7 @@ pub struct Body {
     pub urlencoded: Option<Vec<UrlEncodedParameter>>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct File {
     #[serde(rename = "content")]
@@ -418,6 +440,7 @@ pub struct File {
     pub src: Option<String>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct FormParameter {
     /// Override Content-Type header of this form data entity.
@@ -444,6 +467,7 @@ pub struct FormParameter {
     pub src: Option<String>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct UrlEncodedParameter {
     #[serde(rename = "description")]
@@ -460,6 +484,7 @@ pub struct UrlEncodedParameter {
 }
 
 /// A representation of an ssl certificate
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Certificate {
     /// An object containing path to file certificate, on the file system
@@ -484,6 +509,7 @@ pub struct Certificate {
 }
 
 /// An object containing path to file certificate, on the file system
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Cert {
     /// The path to file containing key for certificate, on the file system
@@ -492,6 +518,7 @@ pub struct Cert {
 }
 
 /// An object containing path to file containing private key, on the file system
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Key {
     /// The path to file containing key for certificate, on the file system
@@ -502,6 +529,7 @@ pub struct Key {
 /// A representation for a list of headers
 ///
 /// Represents a single HTTP Header
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Header {
     #[serde(rename = "description")]
@@ -522,6 +550,7 @@ pub struct Header {
 
 /// Using the Proxy, you can configure your custom proxy into the postman for particular url
 /// match
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct ProxyConfig {
     /// When set to true, ignores this proxy configuration entity
@@ -545,6 +574,7 @@ pub struct ProxyConfig {
     pub tunnel: Option<bool>,
 }
 
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct ResponseClass {
     /// The raw text of the response.
@@ -577,10 +607,17 @@ pub struct ResponseClass {
     /// The response status, e.g: '200 OK'
     #[serde(rename = "status")]
     pub status: Option<String>,
+
+    #[serde(rename = "name")]
+    pub name: Option<String>,
+
+    #[serde(rename = "_postman_previewlanguage")]
+    pub postman_previewlanguage: Option<String>,
 }
 
 /// A Cookie, that follows the [Google Chrome
 /// format](https://developer.chrome.com/extensions/cookies)
+#[serde_with::skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub struct Cookie {
     /// The domain for which this cookie is valid.
