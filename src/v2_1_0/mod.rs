@@ -25,9 +25,9 @@ pub struct Spec {
 /// Represents authentication helpers provided by Postman
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 pub struct Auth {
-    /// The attributes for API Key Authentication.
+    /// The attributes for [API key Auth](https://en.wikipedia.org/wiki/API_key).
     #[serde(rename = "apikey")]
-    pub apikey: Option<Vec<AuthAttribute>>,
+    pub api_key: Option<Vec<AuthAttribute>>,
 
     /// The attributes for [AWS
     /// Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
